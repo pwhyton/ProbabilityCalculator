@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title">Run New Calculation</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  
+  <form [formGroup]="formCalc" (ngSubmit)="submitForm()">
+    <div class="modal-body">
+      <div class="container">
+        <div class="form-group">
+          <label class="label label-primary" for="calcTypeInput">Calculation Type</label>
+          <select class="form-control" id="calculationType" placeholder="Calculation Type" formControlName="calculationType" (change)="resetForm()">
+            <option *ngFor="let pType of probabilityTypes" [value]="pType.Id">
+                {{pType.Value}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="eventAInput">Event A</label>
+          <input type="text" class="form-control" id="eventA" placeholder="Event A" formControlName="eventA" [ngClass]="{ 'is-invalid': submitted && f['eventA'].errors }">
+          <div *ngIf="f['eventA'].errors && f['eventA'].errors['required']">Event A is required</div>
+          <div *ngIf="f['eventA'].errors && f['eventA'].errors['min']">Event A between 0 and 1</div>
+          <div *ngIf="f['eventA'].errors && f['eventA'].errors['max']">Event A between 0 and 1</div>
+          <label for="eventBInput">Event B</label>
+          <input type="number" class="form-control" id="eventB" placeholder="Event B" formControlName="eventB" [ngClass]="{ 'is-invalid': submitted && f['eventB'].errors }">
+          <div *ngIf="f['eventB'].errors && f['eventB'].errors['required']">Event B is required</div>
+          <div *ngIf="f['eventB'].errors && f['eventB'].errors['min']">Event B between 0 and 1</div>
+          <div *ngIf="f['eventB'].errors && f['eventB'].errors['max']">Event B between 0 and 1</div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal-footer">
+      <p class="text-success" *ngIf="runSuccessful">Calculation Done, result is {{probabilityCalculationResult.probability}}</p>
+      <p class="text-danger" *ngIf="runFailed">Failed to run the calculation.</p>
+  
+      <button class="btn btn-lg btn-dark" type="submit">Run</button>
+      <button type="button" class="btn btn-lg btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  </form>

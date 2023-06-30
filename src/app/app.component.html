@@ -1,0 +1,31 @@
+<div class="container d-flex flex-column min-vh-100 justify-content-center align-items-center">
+  <h1 class="bs-gray">Probability Calculations</h1>
+
+  <button class="btn btn-lg btn-primary mt-4" (click)="onBtnRunCalcClicked()">
+    Run  Calculation
+  </button>
+
+  <div class="mh-500px w-100 overflow-auto d-inline-block mt-5 shadow" *ngIf="probabilityService.allCalculations.length">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Calculation Date</th>
+          <th scope="col">Event A</th>
+          <th scope="col">Event B</th>
+          <th scope="col">Calculation Type</th>
+          <th scope="col">Probability</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let calc of probabilityService.allCalculations; index as i">
+        <td>{{ calc.calculationDate | date: 'dd/MM/yyyy hh:mm' }}</td>
+        <td>{{ calc.probabilityCalculationModel.eventA }}</td>
+        <td>{{ calc.probabilityCalculationModel.eventB }}</td>
+        <td>{{ getEnumDisplay(calc.probabilityCalculationModel.probabilityCalculationType) }}</td>
+        <td>{{ calc.probability }}</td>        
+        <td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

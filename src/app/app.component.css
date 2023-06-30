@@ -1,0 +1,7 @@
+.mh-500px {
+    max-height: 500px;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: rgba(170, 168, 168, 0.897);
+ }
